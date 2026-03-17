@@ -331,7 +331,7 @@ class UserManager():
 
             return path
 
-        @routes.get("/userdata/{file}")
+        @routes.get("/userdata/{file:.+}")
         async def getuserdata(request):
             path = get_user_data_path(request, check_exists=True)
             if not isinstance(path, str):
@@ -339,7 +339,7 @@ class UserManager():
 
             return web.FileResponse(path)
 
-        @routes.post("/userdata/{file}")
+        @routes.post("/userdata/{file:.+}")
         async def post_userdata(request):
             """
             Upload or update a user data file.
@@ -402,7 +402,7 @@ class UserManager():
 
             return web.json_response(resp)
 
-        @routes.delete("/userdata/{file}")
+        @routes.delete("/userdata/{file:.+}")
         async def delete_userdata(request):
             path = get_user_data_path(request, check_exists=True)
             if not isinstance(path, str):
@@ -412,7 +412,7 @@ class UserManager():
 
             return web.Response(status=204)
 
-        @routes.post("/userdata/{file}/move/{dest}")
+        @routes.post("/userdata/{file:.+}/move/{dest:.+}")
         async def move_userdata(request):
             """
             Move or rename a user data file.
